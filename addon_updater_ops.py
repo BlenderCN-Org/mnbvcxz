@@ -891,7 +891,7 @@ def register(bl_info):
 	updater.user = "digdendes"
 
 	# choose your own repository, must match github name
-	updater.repo = "wfoijiofe"
+	updater.repo = "mnbvcxz"
 
 	#updater.addon = # define at top of module, MUST be done first
 

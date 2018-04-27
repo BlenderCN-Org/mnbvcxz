@@ -26,14 +26,13 @@
 
 
 bl_info = {
-    'name': "D3T Splint Module",
+    'name': "D3T Model Module",
     'author': "Patrick R. Moore",
-    'version': (0,4,7),
+    'version': (0,0,1),
     'blender': (2, 7, 9),
     'api': "3c04373",
     'location': "3D View -> Tool Shelf",
-    'description': "A training and educational Dental Design CAD Tool not intended for clinical use",
-    'warning': "Not Intended for Clinical Use!",
+    'description': "A utility for simple 3DPrint pre-processing of dental models",
     'wiki_url': "",
     'tracker_url': "",
     'category': '3D View'}
@@ -58,7 +57,7 @@ from . import addon_updater_ops
 
 
 #addon preferences
-class D3SplintAddonPreferences(AddonPreferences):
+class D3ModelAddonPreferences(AddonPreferences):
     bl_idname = __name__
 
     addons = bpy.context.user_preferences.addons
@@ -276,25 +275,25 @@ class D3SplintAddonPreferences(AddonPreferences):
     
     def draw(self, context):
         layout = self.layout
-        layout.label(text="D3Splint Preferences and Settings")
+        layout.label(text="D3Model Preferences and Settings")
         #layout.prop(self, "mat_lib")
         
         
-        if not self.non_clinical_use:
+        #if not self.non_clinical_use:
             
-            row = layout.row()
-            row.label('Please certify non-clinical use')
-            row = layout.row()
-            row.prop(self, "non_clinical_use")
+        #    row = layout.row()
+        #    row.label('Please certify non-clinical use')
+        #    row = layout.row()
+        #    row.prop(self, "non_clinical_use")
             
-            return
+        #    return
             
-        row = layout.row()
-        row.prop(self, "non_clinical_use")
+        #row = layout.row()
+        #row.prop(self, "non_clinical_use")
             
             
-        row = layout.row()
-        row.operator("opendental.d3t_critiacal_settings", text = 'Set Mandatory Settings')
+        #row = layout.row()
+        #row.operator("opendental.d3t_critiacal_settings", text = 'Set Mandatory Settings')
         
 
         ## Visualization 
@@ -318,12 +317,12 @@ class D3SplintAddonPreferences(AddonPreferences):
         row.label(text="Operator Defaults")
         
         ##### Fit and Thickness ####
-        row = layout.row()
-        row.label('Thickness, Fit and Retention')
-        row = layout.row()
-        row.prop(self, "def_shell_thickness")
-        row.prop(self, "def_passive_radius")
-        row.prop(self, "def_blockout_radius")
+        #row = layout.row()
+        #row.label('Thickness, Fit and Retention')
+        #row = layout.row()
+        #row.prop(self, "def_shell_thickness")
+        #row.prop(self, "def_passive_radius")
+        #row.prop(self, "def_blockout_radius")
     
         ##### Model Work ####
         row = layout.row()
@@ -334,47 +333,47 @@ class D3SplintAddonPreferences(AddonPreferences):
         row.prop(self, "d3_model_hole_fill_edge_length")
         
         ##### Deprogrammer #####
-        row = layout.row()
-        row.label('Deprogrammer Defaults')
-        row = layout.row()
+        #row = layout.row()
+        #row.label('Deprogrammer Defaults')
+        #row = layout.row()
         
-        row.prop(self, "def_guidance_angle") 
-        row.prop(self, "def_anterior_length")
-        row.prop(self, "def_posterior_length")
+        #row.prop(self, "def_guidance_angle") 
+        #row.prop(self, "def_anterior_length")
+        #row.prop(self, "def_posterior_length")
         
-        row = layout.row()
-        row.prop(self, "def_posterior_width")
-        row.prop(self, "def_anterior_width")
-        row.prop(self, "def_thickness")
+        #row = layout.row()
+        #row.prop(self, "def_posterior_width")
+        #row.prop(self, "def_anterior_width")
+        #row.prop(self, "def_thickness")
         
-        row = layout.row()
-        row.prop(self, "def_support_height")
-        row.prop(self, "def_support_width")
+        #row = layout.row()
+        #row.prop(self, "def_support_height")
+        #row.prop(self, "def_support_width")
         
         
         ####  Articulator Values #####
-        row = layout.row()
-        row.label('Articulator and Mounting')
+        #row = layout.row()
+        #row.label('Articulator and Mounting')
         
-        row = layout.row()
-        row.prop(self, "def_intra_condyle_width")
-        row.prop(self, "def_condyle_angle")
-        row.prop(self, "def_bennet_angle")
+        #row = layout.row()
+        #row.prop(self, "def_intra_condyle_width")
+        #row.prop(self, "def_condyle_angle")
+        #row.prop(self, "def_bennet_angle")
         
-        row = layout.row()
-        row.prop(self,"def_occlusal_plane_angle")
-        row.prop(self,"def_balkwill_angle")
-        row.prop(self,"def_arm_radius")
+        #row = layout.row()
+        #row.prop(self,"def_occlusal_plane_angle")
+        #row.prop(self,"def_balkwill_angle")
+        #row.prop(self,"def_arm_radius")
 
-        row = layout.row()
-        row.prop(self, "def_incisal_guidance")
-        row.prop(self, "def_canine_guidance")
-        row.prop(self, "def_guidance_delay_lat")
-        row.prop(self, "def_guidance_delay_ant")
+        #row = layout.row()
+        #row.prop(self, "def_incisal_guidance")
+        #row.prop(self, "def_canine_guidance")
+        #row.prop(self, "def_guidance_delay_lat")
+        #row.prop(self, "def_guidance_delay_ant")
         
-        row = layout.row()
-        row.prop(self, "def_condylar_resolution")
-        row.prop(self, "def_range_of_motion")
+        #row = layout.row()
+        #row.prop(self, "def_condylar_resolution")
+        #row.prop(self, "def_range_of_motion")
        
 
         #Experiental Settings
@@ -416,10 +415,10 @@ class D3Splint_OT_general_preferences(Operator):
         
         return {'FINISHED'}
     
-class D3Splint_OT_addon_prefs(Operator):
+class D3Model_OT_addon_prefs(Operator):
     """Display example preferences"""
     bl_idname = "opendental.odc_addon_pref"
-    bl_label = "ODC Preferences Display"
+    bl_label = "D3Model Preferences Display"
     bl_options = {'REGISTER', 'UNDO'}
 
     def execute(self, context):
@@ -485,9 +484,9 @@ def register():
     
     
     
-    import d3classes, odcutils, crown, margin, bridge, splint, implant, panel, help, flexible_tooth, bracket_placement, denture_base, occlusion, ortho, curve_partition, articulator, splint_landmark_fns # , odcmenus, bgl_utils
+    import d3classes, odcutils, crown, margin, bridge, panel, help, flexible_tooth, bracket_placement, denture_base, occlusion, ortho, curve_partition, articulator, splint_landmark_fns # , odcmenus, bgl_utils
     import healing_abutment, model_work, tracking, import_export, splint_booleans, splint_face_bow
-    import meta_modelling, model_labels, splint_occlusal_surfaces, incremental_save, articulator_handlers, plane_cut
+    import model_labels, splint_occlusal_surfaces, incremental_save, articulator_handlers, plane_cut
     
     from .cut_mesh.op_hole_filler import hole_filler_modal
     from .cut_mesh.op_splint_outline import splint_outline_modal
@@ -495,38 +494,38 @@ def register():
     d3classes.register()
     odcutils.register()
     curve_partition.register()
-    splint.register()
-    articulator.register()
+    #splint.register()
+    #articulator.register()
     #help.register()
     #denture_base.register()
-    occlusion.register()
-    splint_landmark_fns.register()
-    splint_booleans.register()
+    #occlusion.register()
+    #splint_landmark_fns.register()
+    #splint_booleans.register()
     model_work.register()
     import_export.register()
     splint_face_bow.register()
-    meta_modelling.register()
+    #meta_modelling.register()
     model_labels.register()
     plane_cut.register()
     hole_filler_modal.register()
-    splint_outline_modal.register()
-    splint_occlusal_surfaces.register()
+    #splint_outline_modal.register()
+    #splint_occlusal_surfaces.register()
     incremental_save.register()
-    articulator_handlers.register()
+    #articulator_handlers.register()
     panel.register()
     
     
     #register this module
-    bpy.utils.register_class(D3SplintAddonPreferences)
+    bpy.utils.register_class(D3ModelAddonPreferences)
     bpy.utils.register_class(D3Splint_OT_general_preferences)
-    bpy.utils.register_class(D3Splint_OT_addon_prefs)
+    bpy.utils.register_class(D3Model_OT_addon_prefs)
     
     tracking.register(bl_info)
     addon_updater_ops.register(bl_info)
     
-    bpy.app.handlers.load_post.append(load_post_method)
-    bpy.app.handlers.save_pre.append(save_pre_method)
-    bpy.app.handlers.frame_change_pre.append(pause_playback)
+    #bpy.app.handlers.load_post.append(load_post_method)
+    #bpy.app.handlers.save_pre.append(save_pre_method)
+    #bpy.app.handlers.frame_change_pre.append(pause_playback)
     
 def unregister():
     #import the relevant modules
@@ -541,8 +540,8 @@ def unregister():
     bpy.app.handlers.frame_change_pre.remove(pause_playback)
     
     #bpy.utils.unregister_module(__name__)
-    bpy.utils.unregister_class(D3SplintAddonPreferences)
-    bpy.utils.unregister_class(D3Splint_OT_addon_prefs)
+    bpy.utils.unregister_class(D3ModelAddonPreferences)
+    bpy.utils.unregister_class(D3Model_OT_addon_prefs)
     
     #unregister them
     d3classes.unregister()
